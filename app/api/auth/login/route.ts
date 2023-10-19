@@ -1,6 +1,7 @@
 import { sign } from "jsonwebtoken";
 import { NextResponse  } from "next/server";
 import { serialize } from "cookie";
+import { COOKIE_NAME } from "@/app/constants";
 const MAX_AGE = 60 * 60 * 24 * 30 // days
 
 export async function POST(request: Request){
@@ -31,7 +32,7 @@ export async function POST(request: Request){
         }
     )
 
-    const seralized = serialize("OutSiteJWT", token , {
+    const seralized = serialize(COOKIE_NAME, token , {
         httpOnly: true,
         secure: process.env.NODE_ENV !== 'development',
         sameSite: "strict",
